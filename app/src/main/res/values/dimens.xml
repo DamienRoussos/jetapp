@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="resto1rating">4.1</dimen>
+    <dimen name="resto2rating">4</dimen>
+    <dimen name="resto3rating">3.8</dimen>
+    <dimen name="resto4rating">3.8</dimen>
+    <dimen name="resto5rating">3.6</dimen>
+    <dimen name="resto6rating">3.4</dimen>
+    <dimen name="resto7rating">3.4</dimen>
+    <dimen name="resto8rating">3.2</dimen>
+    <dimen name="resto9rating">3</dimen>
+</resources>
