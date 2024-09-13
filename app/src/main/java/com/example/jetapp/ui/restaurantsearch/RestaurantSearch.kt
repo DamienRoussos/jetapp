@@ -1,5 +1,6 @@
 package com.example.jetapp.ui.restaurantsearch
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,6 +16,6 @@ fun RestaurantSearch(
             updatedPostCode ->
                 onPostCodeEnter(updatedPostCode)
         },
-        modifier = Modifier
+        modifier = Modifier.fillMaxWidth()
     )
 }

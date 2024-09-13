@@ -4,8 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
 import com.example.jetapp.ui.screen.AppScreen
+import com.example.jetapp.ui.screen.Header
 import com.example.jetapp.ui.theme.JetAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -14,8 +18,15 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             JetAppTheme {
-                Surface {
-                    AppScreen()
+                Scaffold (
+                    modifier = Modifier.fillMaxSize(),
+                    topBar = {
+                        Header()
+                    }
+                ) {
+                    Surface {
+                        AppScreen()
+                    }
                 }
             }
         }

@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
     <string name="app_name">Jet App</string>
 
-    <string name="resto1name">Premier - St Martin\'s Hill Post Office</string>
-    <string name="resto1cuisines">Groceries, Alcohol, Low Delivery Fee</string>
 
-    <string name="resto2name">Co-op - Sturry - Island Road</string>
-    <string name="resto2cuisines">Groceries, Alcohol, Low Delivery Fee</string>
+    <string name="resto1_name">Premier - St Martin\'s Hill Post Office</string>
+    <string name="resto1_cuisines">Groceries, Alcohol, Low Delivery Fee</string>
+    <string name="resto1_rating">4.1</string>
 
-    <string name="resto3name">Subway - Canterbury St. Peters</string>
-    <string name="resto3cuisines">Sandwiches, Lunch, Collect stamps, Deals</string>
+    <string name="resto2_name">Co-op - Sturry - Island Road</string>
+    <string name="resto2_cuisines">Groceries, Alcohol, Low Delivery Fee</string>
+    <string name="resto2_rating">4.0</string>
 
-    <string name="resto4name">Subway - 118 Sturry Road</string>
-    <string name="resto4cuisines">Sandwiches, Lunch</string>
+    <string name="resto3_name">Subway - Canterbury St. Peters</string>
+    <string name="resto3_cuisines">Sandwiches, Lunch, Collect stamps, Deals</string>
+    <string name="resto3_rating">3.8</string>
 
-    <string name="resto5name">Londis - Lakeside</string>
-    <string name="resto5cuisines">Groceries, Alcohol, Low Delivery Fee</string>
+    <string name="resto4_name">Subway - 118 Sturry Road</string>
+    <string name="resto4_cuisines">Sandwiches, Lunch</string>
+    <string name="resto4_rating">3.8</string>
 
-    <string name="resto6name">Greggs - Canterbury, 22 St Georges St</string>
-    <string name="resto6cuisines">Sandwiches, Breakfast</string>
+    <string name="resto5_name">Londis - Lakeside</string>
+    <string name="resto5_cuisines">Groceries, Alcohol, Low Delivery Fee</string>
+    <string name="resto5_rating">3.6</string>
 
-    <string name="resto7name">Morrisons Cafe - Canterbury Ten Perch Rd</string>
-    <string name="resto7cuisines">Café, Breakfast</string>
+    <string name="resto6_name">Greggs - Canterbury, 22 St Georges St</string>
+    <string name="resto6_cuisines">Sandwiches, Breakfast</string>
+    <string name="resto6_rating">3.4</string>
 
-    <string name="resto8name">McDonald\'s® - Canterbury High Street</string>
-    <string name="resto8cuisines">Burgers, Chicken, Breakfast, Sandwiches</string>
+    <string name="resto7_name">Morrisons Cafe - Canterbury Ten Perch Rd</string>
+    <string name="resto7_cuisines">Café, Breakfast</string>
+    <string name="resto7_rating">3.4</string>
 
-    <string name="resto9name">Asda - Canterbury</string>
-    <string name="resto9cuisines">Groceries, Alcohol, Low Delivery Fee</string>
+    <string name="resto8_name">McDonald\'s® - Canterbury High Street</string>
+    <string name="resto8_cuisines">Burgers, Chicken, Breakfast, Sandwiches</string>
+    <string name="resto8_rating">3.2</string>
 
+    <string name="resto9_name">Asda - Canterbury</string>
+    <string name="resto9_cuisines">Groceries, Alcohol, Low Delivery Fee</string>
+    <string name="resto9_rating">3.0</string>
 </resources>

@@ -4,5 +4,5 @@ data class RestaurantModel(
     val name: Int,
     val cuisineType: Int,
     val rating: Int,
-    val image: Int
+    val image: Int,
 )
