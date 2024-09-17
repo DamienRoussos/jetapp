@@ -11,9 +11,13 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.example.jetapp.R
-import com.example.jetapp.ui.data.RestaurantModel
+import com.example.jetapp.data.RestaurantModel
+import com.example.jetapp.ui.parameterprovider.RestaurantModelParameterProvider
+import com.example.jetapp.ui.theme.JetAppTheme
 import com.example.jetapp.ui.theme.JetOrange
 
 @Composable
@@ -35,8 +39,20 @@ fun RestaurantCard(
                 restaurant = restaurant,
             )
             RestaurantImage(
-                restaurant = restaurant,
+                image = restaurant.image,
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RestaurantCardPreview(
+    @PreviewParameter(
+        RestaurantModelParameterProvider::class)
+    model: RestaurantModel
+) {
+    JetAppTheme {
+        RestaurantCard(model)
     }
 }

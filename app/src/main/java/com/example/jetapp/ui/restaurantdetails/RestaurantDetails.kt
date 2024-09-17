@@ -1,6 +1,5 @@
 package com.example.jetapp.ui.restaurantdetails
 
-import android.widget.Space
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,10 +12,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.jetapp.ui.data.RestaurantModel
-import com.example.jetapp.ui.helpers.RatingStars
+import com.example.jetapp.data.RestaurantModel
+import com.example.jetapp.ui.starrating.RatingStars
+import com.example.jetapp.ui.parameterprovider.RestaurantModelParameterProvider
+import com.example.jetapp.ui.theme.JetAppTheme
 
 @Composable
 fun RestaurantDetails(
@@ -24,7 +27,7 @@ fun RestaurantDetails(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .padding(4.dp)
             .fillMaxSize(0.75f),
         horizontalAlignment = Alignment.Start
@@ -47,7 +50,7 @@ fun RestaurantDetails(
         )
         Row {
             Text(
-                text = stringResource(restaurant.rating.toInt()),
+                text = stringResource(restaurant.rating),
                 modifier = Modifier.padding(4.dp),
                 style = TextStyle(
                     fontSize = 12.sp
@@ -56,5 +59,17 @@ fun RestaurantDetails(
             Spacer(modifier.padding(4.dp))
             RatingStars(restaurant.rating.toFloat())
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RestaurantDetailsPreview(
+    @PreviewParameter(
+        RestaurantModelParameterProvider::class)
+    model: RestaurantModel
+) {
+    JetAppTheme {
+        RestaurantDetails(model)
     }
 }

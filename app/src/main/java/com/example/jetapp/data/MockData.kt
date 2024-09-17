@@ -1,4 +1,4 @@
-package com.example.jetapp.ui.data
+package com.example.jetapp.data
 
 import com.example.jetapp.R
 

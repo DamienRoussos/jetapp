@@ -13,7 +13,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.jetapp.ui.data.MockData
+import com.example.jetapp.data.MockData
+import com.example.jetapp.data.RestaurantModel
 import com.example.jetapp.ui.restaurantdetails.RestaurantCard
 import com.example.jetapp.ui.restaurantsearch.RestaurantSearch
 import com.example.jetapp.ui.theme.JetAppTheme
@@ -21,23 +22,26 @@ import com.example.jetapp.ui.theme.JetAppTheme
 @Composable
 fun AppScreen(
     modifier: Modifier = Modifier,
+    onPostCodeChange: (String) -> Unit,
+    restaurants: List<RestaurantModel>
 ) {
     var userPostCode by remember { mutableStateOf("Enter your postcode") }
 
     Column(modifier = modifier) {
-        Spacer(modifier = Modifier.height(52.dp))
+        Spacer(modifier = Modifier.height(24.dp))
         RestaurantSearch(
             userPostCode = userPostCode,
             onPostCodeEnter = { updatedPostcode ->
                 userPostCode = updatedPostcode
+                onPostCodeChange(updatedPostcode)
             },
         )
         LazyColumn(
             modifier = Modifier.padding(16.dp),
         ) {
-            val restaurants = MockData().loadMockData()
-            items(restaurants.size) { restaurant ->
-                RestaurantCard(restaurants[restaurant])
+
+            items(restaurants.size) { itemPosition ->
+                RestaurantCard(restaurants[itemPosition])
             }
         }
     }
@@ -48,6 +52,6 @@ fun AppScreen(
 @Composable
 fun AppScreenPreview() {
     JetAppTheme {
-        AppScreen()
+        AppScreen(onPostCodeChange = {}, restaurants = MockData().loadMockData())
     }
 }

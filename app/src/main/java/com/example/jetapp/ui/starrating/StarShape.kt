@@ -1,4 +1,4 @@
-package com.example.jetapp.ui.helpers
+package com.example.jetapp.ui.starrating
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
