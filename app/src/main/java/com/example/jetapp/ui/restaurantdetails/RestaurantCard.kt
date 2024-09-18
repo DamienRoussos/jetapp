@@ -15,14 +15,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.example.jetapp.R
-import com.example.jetapp.data.RestaurantModel
+import com.example.jetapp.data.Restaurant
 import com.example.jetapp.ui.parameterprovider.RestaurantModelParameterProvider
 import com.example.jetapp.ui.theme.JetAppTheme
 import com.example.jetapp.ui.theme.JetOrange
 
 @Composable
 fun RestaurantCard(
-    restaurant: RestaurantModel,
+    restaurant: Restaurant,
 ) {
     Card(
         modifier = Modifier.padding(bottom = 8.dp),
@@ -50,7 +50,7 @@ fun RestaurantCard(
 fun RestaurantCardPreview(
     @PreviewParameter(
         RestaurantModelParameterProvider::class)
-    model: RestaurantModel
+    model: Restaurant
 ) {
     JetAppTheme {
         RestaurantCard(model)

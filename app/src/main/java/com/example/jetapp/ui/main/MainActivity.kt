@@ -29,8 +29,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             JetAppTheme {
                 val restaurantsState by viewModel.restaurantsState
-                val restaurantsFlow by viewModel.restaurantsFlow.collectAsState()
-                val restaurantsLiveData by viewModel.restaurantsLiveData.observeAsState()
+//                val restaurantsFlow by viewModel.restaurantsFlow.collectAsState()
+//                val restaurantsLiveData by viewModel.restaurantsLiveData.observeAsState()
 
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
                     Surface {
                         AppScreen(
                             modifier = Modifier.padding(contentPadding),
-                            onPostCodeChange = viewModel::searchRestaurant,
+                            onPostCodeChange = viewModel::searchRestaurantByPostCode,
                             restaurants = restaurantsState
                         )
                     }
