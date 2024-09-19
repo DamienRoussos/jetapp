@@ -1,24 +1,48 @@
 package com.example.jetapp.ui.starrating
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import kotlin.math.floor
+import com.example.jetapp.ui.theme.JetOrange
 
 @Composable
 fun RatingStars(rating: Double) {
-    Row {
-        val filledStars = rating.toInt() // Directly convert to Int for flooring
-        val remaining = rating - filledStars
+    val filledPercentage = (rating * 20).toFloat() // Convert to 0-100 scale
 
-        repeat(filledStars) {
-            StarShape(filled = 1.0, strokeWidth = 0.dp) // Fully filled
-        }
-        if (remaining > 0) {
-            StarShape(filled = remaining, strokeWidth = 0.dp) // Partially filled
-        }
-        repeat(5 - filledStars - (if (remaining > 0) 1 else 0)) {
-            StarShape(filled = 0.0, strokeWidth = 2.dp) // Empty with stroke
+    Box(
+        modifier = Modifier
+            .width(80.dp)
+            .height(16.dp) // Adjust height as needed
+    ) {
+        // Background filled rectangle (star color)
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(JetOrange)
+        )
+
+        // Overlay filled rectangle (card color)
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(1 - filledPercentage / 100) // Fill based on rating
+                .background(Color.White) // Or your card color
+        )
+
+        // Stars (transparent)
+        Row(modifier = Modifier.fillMaxSize()) {
+            repeat(5) {
+                StarShape(filled = true, color = Color.Transparent)
+            }
         }
     }
 }

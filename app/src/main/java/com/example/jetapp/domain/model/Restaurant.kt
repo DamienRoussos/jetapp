@@ -1,4 +1,4 @@
-package com.example.jetapp.data
+package com.example.jetapp.domain.model
 
 data class Restaurant(
     val name: String,

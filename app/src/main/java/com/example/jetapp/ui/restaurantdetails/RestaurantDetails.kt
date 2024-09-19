@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.jetapp.data.Restaurant
+import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.ui.parameterprovider.RestaurantModelParameterProvider
 import com.example.jetapp.ui.starrating.RatingStars
 import com.example.jetapp.ui.theme.JetAppTheme
@@ -72,7 +72,7 @@ fun RestaurantDetails(
                 )
             )
             Spacer(modifier.padding(4.dp))
-//            RatingStars(restaurant.rating)
+            RatingStars(restaurant.rating)
         }
     }
 }

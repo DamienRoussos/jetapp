@@ -2,17 +2,13 @@ package com.example.jetapp.ui.main
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.jetapp.data.MockData
-import com.example.jetapp.data.Restaurant
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import com.example.jetapp.domain.model.Restaurant
+import com.example.jetapp.domain.usecase.GetSortedRestaurantsUseCase
 
-class MainViewModel: ViewModel() {
-
-    private val mockData = MockData().loadMockData()
+class MainViewModel(
+    private val getSortedRestaurants: GetSortedRestaurantsUseCase = GetSortedRestaurantsUseCase(),
+) : ViewModel() {
 
     private val _restaurantsState = mutableStateOf<List<Restaurant>>(emptyList())
     val restaurantsState: State<List<Restaurant>> = _restaurantsState
@@ -24,7 +20,9 @@ class MainViewModel: ViewModel() {
 //    val restaurantsLiveData: LiveData<List<Restaurant>> = _restaurantsLiveData
 
     fun searchRestaurantByPostCode(postCode: String) {
-        _restaurantsState.value = mockData.filter { it.postCode.contains(postCode.uppercase()) }
+        _restaurantsState.value = getSortedRestaurants(postCode)
+
+
 //        _restaurantsFlow.value += MockData().loadMockData()
 //        _restaurantsLiveData.value = _restaurantsLiveData.value
 

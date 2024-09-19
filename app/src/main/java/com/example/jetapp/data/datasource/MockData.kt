@@ -1,4 +1,7 @@
-package com.example.jetapp.data
+package com.example.jetapp.data.datasource
+
+import com.example.jetapp.domain.model.CuisineType
+import com.example.jetapp.domain.model.Restaurant
 
 class MockData {
     fun loadMockData(): List<Restaurant> {
