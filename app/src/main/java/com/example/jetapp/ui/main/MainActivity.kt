@@ -40,7 +40,8 @@ class MainActivity : ComponentActivity() {
                         AppScreen(
                             modifier = Modifier.padding(contentPadding),
                             onPostCodeChange = viewModel::searchRestaurantByPostCode,
-                            restaurants = restaurantsState
+                            restaurants = restaurantsState,
+                            onSetFavourite = viewModel::setRestaurantAsFavourite
                         )
                     }
                 }

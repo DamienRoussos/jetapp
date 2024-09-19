@@ -23,6 +23,7 @@ import com.example.jetapp.ui.theme.JetOrange
 @Composable
 fun RestaurantCard(
     restaurant: Restaurant,
+    onSetFavourite: (Int) -> Unit,
 ) {
     Card(
         modifier = Modifier.padding(bottom = 8.dp),
@@ -37,6 +38,7 @@ fun RestaurantCard(
         ) {
             RestaurantDetails(
                 restaurant = restaurant,
+                onSetFavourite = onSetFavourite
             )
             RestaurantImage(
                 image = restaurant.image,
@@ -54,6 +56,6 @@ fun RestaurantCardPreview(
     model: Restaurant,
 ) {
     JetAppTheme {
-        RestaurantCard(model)
+        RestaurantCard(model, {})
     }
 }
