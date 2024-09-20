@@ -6,7 +6,7 @@ import com.example.jetapp.domain.repository.RestaurantRepository
 
 class RestaurantRepositoryImpl : RestaurantRepository {
     private val data = MockData().loadMockData()
-    private val favourites: List<Restaurant> = emptyList()
+//    private val favourites: List<Restaurant> = emptyList()
 
     override fun getRestaurantsByPostCode(postCode: String): List<Restaurant> {
         return data.filter { it.postCode.contains(postCode.uppercase()) }
@@ -18,7 +18,7 @@ class RestaurantRepositoryImpl : RestaurantRepository {
         }
     }
 
-    override fun getFavouriteRestaurants(): List<Restaurant> {
+    override fun getFavouriteRestaurants(isFavourite: Boolean): List<Restaurant> {
         return data.filter { it.isFavourite }
     }
 }

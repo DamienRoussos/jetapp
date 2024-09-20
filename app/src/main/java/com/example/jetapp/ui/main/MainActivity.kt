@@ -41,7 +41,8 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier.padding(contentPadding),
                             onPostCodeChange = viewModel::searchRestaurantByPostCode,
                             restaurants = restaurantsState,
-                            onSetFavourite = viewModel::setRestaurantAsFavourite
+                            onSetFavourite = viewModel::setRestaurantAsFavourite,
+                            onGetFavourites = viewModel::getFavouriteRestaurants
                         )
                     }
                 }

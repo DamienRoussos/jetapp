@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,6 +28,7 @@ fun AppScreen(
     onPostCodeChange: (String) -> Unit,
     restaurants: List<Restaurant>,
     onSetFavourite: (Int) -> Unit,
+    onGetFavourites: (Boolean) -> Unit
 ) {
     var userPostCode by remember { mutableStateOf("Enter your postcode") }
 
@@ -35,7 +37,11 @@ fun AppScreen(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Spacer(modifier = modifier.padding(4.dp))
-            HeartShape(false)
+            IconButton(
+                onClick = {onGetFavourites(true)}
+            ) {
+                HeartShape(true)
+            }
             Spacer(modifier = modifier.padding(4.dp))
             RestaurantSearch(
                 userPostCode = userPostCode,
@@ -66,6 +72,7 @@ fun AppScreenPreview() {
         AppScreen(
             onPostCodeChange = {},
             restaurants = MockData().loadMockData(),
-            onSetFavourite = {})
+            onSetFavourite = {},
+            onGetFavourites = {})
     }
 }
