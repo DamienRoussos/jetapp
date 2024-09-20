@@ -32,14 +32,15 @@ class MainViewModel(
     }
 
     fun setRestaurantAsFavourite(restaurantId: Int) {
-        _restaurantsState.value = _restaurantsState.value.map { restaurant ->
-            if (restaurant.id == restaurantId) {
+
+//        _restaurantsState.value = _restaurantsState.value.map { restaurant ->
+//            if (restaurant.id == restaurantId) {
                 setFavouriteRestaurant(restaurantId)
-                restaurant.copy(isFavourite = true)
-            } else {
-                restaurant
-            }
-        }
+//                restaurant.copy(isFavourite = true)
+//            } else {
+//                restaurant
+//            }
+//        }
     }
 
     fun getFavouriteRestaurants(isFavourite: Boolean) {
