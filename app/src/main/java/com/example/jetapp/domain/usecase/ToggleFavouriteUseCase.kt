@@ -3,10 +3,10 @@ package com.example.jetapp.domain.usecase
 import com.example.jetapp.data.repository.RestaurantRepositoryImpl
 import com.example.jetapp.domain.repository.RestaurantRepository
 
-class SetFavouriteRestaurantUseCase(
+class ToggleFavouriteUseCase(
     private val repository: RestaurantRepository = RestaurantRepositoryImpl(),
 ) {
     operator fun invoke(restaurantId: Int) {
-        repository.setFavouriteRestaurant(restaurantId)
+        return repository.toggleRestaurantIsFavourite(restaurantId)
     }
 }

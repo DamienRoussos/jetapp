@@ -1,6 +1,6 @@
 package com.example.jetapp.data.repository
 
-import androidx.compose.runtime.internal.isLiveLiteralsEnabled
+import android.util.Log
 import com.example.jetapp.data.datasource.MockData
 import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.domain.repository.RestaurantRepository
@@ -13,27 +13,19 @@ class RestaurantRepositoryImpl : RestaurantRepository {
     }
 
     //    adjust for favourite and unfavourite
-    override fun setFavouriteRestaurant(restaurantId: Int) {
-
-        data = data.map { restaurant ->
-            if (restaurant.id == restaurantId) {
+    override fun toggleRestaurantIsFavourite(restaurantId: Int) {
+        data = data.map {restaurant ->
+            if(restaurant.id == restaurantId) {
                 restaurant.copy(isFavourite = !restaurant.isFavourite)
             } else {
                 restaurant
             }
         }
-
-//        val index = data.indexOfFirst { it.id == restaurantId }
-//        var restaurant = data.find { it.id == restaurantId } ?: return
-//        if(restaurant.isFavourite) {
-//            restaurant = restaurant.copy(isFavourite = false)
-//        } else {
-//            restaurant = restaurant.copy(isFavourite = true)
-//        }
-//        data[index] = restaurant
+        Log.d("toggle",data.toString())
     }
 
     override fun getFavouriteRestaurants(isFavourite: Boolean): List<Restaurant> {
-        return data.filter { it.isFavourite }
+        Log.d("get",data.toString())
+        return data.filter { it.isFavourite == isFavourite }
     }
 }

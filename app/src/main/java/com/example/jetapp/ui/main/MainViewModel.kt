@@ -1,21 +1,23 @@
 package com.example.jetapp.ui.main
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.domain.usecase.GetFavouriteRestaurantsUseCase
 import com.example.jetapp.domain.usecase.GetSortedRestaurantsUseCase
-import com.example.jetapp.domain.usecase.SetFavouriteRestaurantUseCase
+import com.example.jetapp.domain.usecase.ToggleFavouriteUseCase
 
 class MainViewModel(
     private val getSortedRestaurants: GetSortedRestaurantsUseCase = GetSortedRestaurantsUseCase(),
-    private val setFavouriteRestaurant: SetFavouriteRestaurantUseCase = SetFavouriteRestaurantUseCase(),
-    private val getFavouriteRestaurant: GetFavouriteRestaurantsUseCase = GetFavouriteRestaurantsUseCase()
+    private val toggleFavouriteUseCase: ToggleFavouriteUseCase = ToggleFavouriteUseCase(),
+    private val getFavouriteRestaurants: GetFavouriteRestaurantsUseCase = GetFavouriteRestaurantsUseCase(),
 ) : ViewModel() {
 
     private val _restaurantsState = mutableStateOf<List<Restaurant>>(emptyList())
     val restaurantsState: State<List<Restaurant>> = _restaurantsState
+
 
 //    private val _restaurantsFlow = MutableStateFlow<List<Restaurant>>(emptyList())
 //    val restaurantsFlow: StateFlow<List<Restaurant>> = _restaurantsFlow
@@ -31,19 +33,20 @@ class MainViewModel(
 
     }
 
-    fun setRestaurantAsFavourite(restaurantId: Int) {
-
-//        _restaurantsState.value = _restaurantsState.value.map { restaurant ->
-//            if (restaurant.id == restaurantId) {
-                setFavouriteRestaurant(restaurantId)
-//                restaurant.copy(isFavourite = true)
-//            } else {
-//                restaurant
-//            }
-//        }
+    fun toggleRestaurantIsFavourite(restaurantId: Int) {
+//        toggleFavouriteUseCase(restaurantId)
+        _restaurantsState.value = _restaurantsState.value.map { restaurant ->
+            if (restaurant.id == restaurantId) {
+                toggleFavouriteUseCase(restaurantId)
+                restaurant.copy(isFavourite = !restaurant.isFavourite)
+            } else {
+                restaurant
+            }
+        }
+        Log.d("viewmodel", _restaurantsState.value.toString())
     }
 
     fun getFavouriteRestaurants(isFavourite: Boolean) {
-        _restaurantsState.value = getFavouriteRestaurant(isFavourite)
+        _restaurantsState.value = _restaurantsState.value.filter { it.isFavourite == isFavourite }
     }
 }

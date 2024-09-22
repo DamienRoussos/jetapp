@@ -7,9 +7,7 @@ import com.example.jetapp.domain.repository.RestaurantRepository
 class GetSortedRestaurantsUseCase(
     private val repository: RestaurantRepository = RestaurantRepositoryImpl(),
 ) {
-
     operator fun invoke(postCode: String): List<Restaurant> {
         return repository.getRestaurantsByPostCode(postCode).sortedBy { it.name }
     }
-
 }

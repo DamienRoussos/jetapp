@@ -28,19 +28,25 @@ fun AppScreen(
     onPostCodeChange: (String) -> Unit,
     restaurants: List<Restaurant>,
     onSetFavourite: (Int) -> Unit,
-    onGetFavourites: (Boolean) -> Unit
+    onGetFavourites: (Boolean) -> Unit,
 ) {
     var userPostCode by remember { mutableStateOf("Enter your postcode") }
+    var showFavourites by remember { mutableStateOf(false) }
 
     Column(modifier = modifier) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Spacer(modifier = modifier.padding(4.dp))
-            IconButton(
-                onClick = {onGetFavourites(true)}
-            ) {
-                HeartShape(true)
+            IconButton(onClick = {
+                showFavourites = !showFavourites
+                if(showFavourites) {
+                    onGetFavourites(showFavourites)
+                } else {
+                    onPostCodeChange(userPostCode)
+                }
+            }) {
+                HeartShape(showFavourites)
             }
             Spacer(modifier = modifier.padding(4.dp))
             RestaurantSearch(
