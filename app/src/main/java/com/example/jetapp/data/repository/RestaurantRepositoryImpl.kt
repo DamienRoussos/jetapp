@@ -1,16 +1,13 @@
 package com.example.jetapp.data.repository
 
-import android.util.Log
 import com.example.jetapp.data.datasource.MockData
-import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.domain.repository.RestaurantRepository
 
 class RestaurantRepositoryImpl : RestaurantRepository {
     private val data = MockData().loadMockData().toMutableList()
 
-    override fun getRestaurantsByPostCode(postCode: String): List<Restaurant> {
-        return data.filter { it.postCode.contains(postCode.uppercase()) }
-    }
+    override fun getRestaurantsByPostCode(postCode: String) =
+        data.filter { it.postCode.contains(postCode.uppercase()) }
 
     //    adjust for favourite and unfavourite
     override fun toggleRestaurantIsFavourite(restaurantId: Int) {
@@ -35,8 +32,5 @@ class RestaurantRepositoryImpl : RestaurantRepository {
 //        Log.d("toggle",data.toString())
     }
 
-    override fun getFavouriteRestaurants(): List<Restaurant> {
-        Log.d("get", data.toString())
-        return data.filter { it.isFavourite }
-    }
+    override fun getFavouriteRestaurants() = data.filter { it.isFavourite }
 }
