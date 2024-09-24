@@ -54,6 +54,7 @@ fun AppScreen(
                 onPostCodeEnter = { updatedPostcode ->
                     userPostCode = updatedPostcode
                     onPostCodeChange(updatedPostcode)
+                    showFavourites = false
                 },
             )
         }

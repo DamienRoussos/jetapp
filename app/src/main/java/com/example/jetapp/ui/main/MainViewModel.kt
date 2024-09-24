@@ -4,15 +4,18 @@ import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.example.jetapp.data.repository.RestaurantRepositoryImpl
 import com.example.jetapp.domain.model.Restaurant
+import com.example.jetapp.domain.repository.RestaurantRepository
 import com.example.jetapp.domain.usecase.GetFavouriteRestaurantsUseCase
 import com.example.jetapp.domain.usecase.GetSortedRestaurantsUseCase
 import com.example.jetapp.domain.usecase.ToggleFavouriteUseCase
 
 class MainViewModel(
-    private val getSortedRestaurants: GetSortedRestaurantsUseCase = GetSortedRestaurantsUseCase(),
-    private val toggleFavouriteUseCase: ToggleFavouriteUseCase = ToggleFavouriteUseCase(),
-    private val getFavouriteRestaurants: GetFavouriteRestaurantsUseCase = GetFavouriteRestaurantsUseCase(),
+    repository: RestaurantRepository = RestaurantRepositoryImpl(),
+    private val getSortedRestaurants: GetSortedRestaurantsUseCase = GetSortedRestaurantsUseCase(repository),
+    private val toggleFavouriteUseCase: ToggleFavouriteUseCase = ToggleFavouriteUseCase(repository),
+    private val getFavouriteRestaurants: GetFavouriteRestaurantsUseCase = GetFavouriteRestaurantsUseCase(repository),
 ) : ViewModel() {
 
     private val _restaurantsState = mutableStateOf<List<Restaurant>>(emptyList())
