@@ -20,6 +20,7 @@ class MainViewModel(
 
     private val _restaurantsState = mutableStateOf<List<Restaurant>>(emptyList())
     val restaurantsState: State<List<Restaurant>> = _restaurantsState
+    private var lastSearchedPostCode = ""
 
 
 //    private val _restaurantsFlow = MutableStateFlow<List<Restaurant>>(emptyList())
@@ -30,6 +31,7 @@ class MainViewModel(
 
     fun searchRestaurantByPostCode(postCode: String) {
         _restaurantsState.value = getSortedRestaurants(postCode)
+        lastSearchedPostCode = postCode
 
 //        _restaurantsFlow.value += MockData().loadMockData()
 //        _restaurantsLiveData.value = _restaurantsLiveData.value
@@ -50,6 +52,10 @@ class MainViewModel(
     }
 
     fun getFavouriteRestaurants(isFavourite: Boolean) {
-        _restaurantsState.value = _restaurantsState.value.filter { it.isFavourite == isFavourite }
+        if(isFavourite) {
+            _restaurantsState.value = getFavouriteRestaurants()
+        } else {
+            _restaurantsState.value = getSortedRestaurants(lastSearchedPostCode)
+        }
     }
 }
