@@ -12,7 +12,6 @@ class RestaurantRepositoryImpl : RestaurantRepository {
         return data.filter { it.postCode.contains(postCode.uppercase()) }
     }
 
-    //    adjust for favourite and unfavourite
     override fun toggleRestaurantIsFavourite(restaurantId: Int) {
         data = data.map {restaurant ->
             if(restaurant.id == restaurantId) {
@@ -21,7 +20,6 @@ class RestaurantRepositoryImpl : RestaurantRepository {
                 restaurant
             }
         }
-        Log.d("toggle",data.toString())
     }
 
     override fun getFavouriteRestaurants(isFavourite: Boolean): List<Restaurant> {
