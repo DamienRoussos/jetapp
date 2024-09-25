@@ -3,8 +3,10 @@ package com.example.jetapp.ui.screen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,27 +19,39 @@ import androidx.compose.ui.unit.dp
 import com.example.jetapp.data.datasource.MockData
 import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.ui.features.FavouriteRestaurants
-import com.example.jetapp.ui.heartshapefavourite.HeartShape
+import com.example.jetapp.ui.main.MainViewModel
 import com.example.jetapp.ui.restaurantdetails.RestaurantCardList
 import com.example.jetapp.ui.restaurantsearch.RestaurantSearch
 import com.example.jetapp.ui.theme.JetAppTheme
 
 @Composable
 fun AppScreen(
-    modifier: Modifier = Modifier,
-    onPostCodeChange: (String) -> Unit,
+//    onPostCodeChange: (String) -> Unit,
     restaurants: List<Restaurant>,
-    onSetFavourite: (Int) -> Unit,
-    onFilterFavourites: (Boolean) -> Unit,
+    viewModel: MainViewModel,
+    modifier: Modifier = Modifier,
+//    onSetFavourite: (Int) -> Unit,
+//    onFilterFavourites: (Boolean) -> Unit,
 ) {
     var userPostCode by remember { mutableStateOf("Enter your postcode") }
     var showFavouritesOnly by remember { mutableStateOf(false) }
 
-    Column(modifier = modifier) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Spacer(modifier = modifier.padding(4.dp))
+    val onPostCodeChange = viewModel::searchRestaurantByPostCode
+    val onSetFavourite = viewModel::toggleRestaurantIsFavourite
+    val onFilterFavourites = viewModel::filterFavouriteRestaurants
+
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            Header()
+        }
+    ) { contentPadding ->
+        Surface {
+            Column(modifier = modifier.padding(contentPadding)) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Spacer(modifier = modifier.padding(4.dp))
 //            IconButton(onClick = {
 //                showFavouritesOnly = !showFavouritesOnly
 //                if (showFavouritesOnly) {
@@ -48,29 +62,30 @@ fun AppScreen(
 //            }) {
 //                HeartShape(showFavouritesOnly)
 //            }
-            FavouriteRestaurants(
-                toggleFavourites = { showFavouritesOnly = !showFavouritesOnly },
-                showFavourites = showFavouritesOnly,
-                userPostCode = userPostCode,
-                onFilterFavourites = { onFilterFavourites(showFavouritesOnly) },
-                onExitFilterFavourites = { onPostCodeChange(userPostCode) }
-            )
-            Spacer(modifier = modifier.padding(4.dp))
-            RestaurantSearch(
-                userPostCode = userPostCode,
-                onPostCodeEnter = { updatedPostcode ->
-                    userPostCode = updatedPostcode
-                    onPostCodeChange(updatedPostcode)
-                    showFavouritesOnly = false
-                },
-            )
+                    FavouriteRestaurants(
+                        toggleFavourites = { showFavouritesOnly = !showFavouritesOnly },
+                        showFavourites = showFavouritesOnly,
+                        userPostCode = userPostCode,
+                        onFilterFavourites = { onFilterFavourites(showFavouritesOnly) },
+                        onExitFilterFavourites = { onPostCodeChange(userPostCode) }
+                    )
+                    Spacer(modifier = modifier.padding(4.dp))
+                    RestaurantSearch(
+                        userPostCode = userPostCode,
+                        onPostCodeEnter = { updatedPostcode ->
+                            userPostCode = updatedPostcode
+                            onPostCodeChange(updatedPostcode)
+                            showFavouritesOnly = false
+                        },
+                    )
+                }
+                RestaurantCardList(
+                    restaurants = restaurants,
+                    onSetFavourite = onSetFavourite
+                )
+            }
         }
-        RestaurantCardList(
-            restaurants = restaurants,
-            onSetFavourite = onSetFavourite
-        )
     }
-
 }
 
 @Preview(showBackground = true)
@@ -78,9 +93,8 @@ fun AppScreen(
 fun AppScreenPreview() {
     JetAppTheme {
         AppScreen(
-            onPostCodeChange = {},
+            viewModel = MainViewModel(),
             restaurants = MockData().loadMockData(),
-            onSetFavourite = {},
-            onFilterFavourites = {})
+        )
     }
 }

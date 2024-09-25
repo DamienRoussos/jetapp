@@ -30,23 +30,23 @@ class MainActivity : ComponentActivity() {
 //                val restaurantsFlow by viewModel.restaurantsFlow.collectAsState()
 //                val restaurantsLiveData by viewModel.restaurantsLiveData.observeAsState()
 
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    topBar = {
-                        Header()
-                    }
-                ) { contentPadding ->
-                    Surface {
+//                Scaffold(
+//                    modifier = Modifier.fillMaxSize(),
+//                    topBar = {
+//                        Header()
+//                    }
+//                ) { contentPadding ->
+//                    Surface {
                         AppScreen(
-                            modifier = Modifier.padding(contentPadding),
-                            onPostCodeChange = viewModel::searchRestaurantByPostCode,
+//                            onPostCodeChange = viewModel::searchRestaurantByPostCode,
                             restaurants = restaurantsState,
-                            onSetFavourite = viewModel::toggleRestaurantIsFavourite,
-                            onFilterFavourites = viewModel::filterFavouriteRestaurants
+                            viewModel = viewModel,
+//                            onSetFavourite = viewModel::toggleRestaurantIsFavourite,
+//                            onFilterFavourites = viewModel::filterFavouriteRestaurants
                         )
                     }
                 }
             }
         }
-    }
-}
+//    }
+//}
