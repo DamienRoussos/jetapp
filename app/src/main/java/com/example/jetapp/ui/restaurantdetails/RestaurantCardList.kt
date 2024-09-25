@@ -10,7 +10,7 @@ import com.example.jetapp.domain.model.Restaurant
 @Composable
 fun RestaurantCardList(
     restaurants: List<Restaurant>,
-    onSetFavourite: (Int) -> Unit
+    onSetFavourite: (Int) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier.padding(16.dp),
