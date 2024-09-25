@@ -19,6 +19,7 @@ import com.example.jetapp.data.datasource.MockData
 import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.ui.heartshapefavourite.HeartShape
 import com.example.jetapp.ui.restaurantdetails.RestaurantCard
+import com.example.jetapp.ui.restaurantdetails.RestaurantCardList
 import com.example.jetapp.ui.restaurantsearch.RestaurantSearch
 import com.example.jetapp.ui.theme.JetAppTheme
 
@@ -58,16 +59,10 @@ fun AppScreen(
                 },
             )
         }
-        LazyColumn(
-            modifier = Modifier.padding(16.dp),
-        ) {
-            items(restaurants.size) { itemPosition ->
-                RestaurantCard(
-                    restaurant = restaurants[itemPosition],
-                    onSetFavourite = onSetFavourite
-                )
-            }
-        }
+        RestaurantCardList(
+            restaurants = restaurants,
+            onSetFavourite = onSetFavourite
+        )
     }
 
 }
