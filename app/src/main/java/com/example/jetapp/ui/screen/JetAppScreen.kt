@@ -26,12 +26,9 @@ import com.example.jetapp.ui.theme.JetAppTheme
 
 @Composable
 fun AppScreen(
-//    onPostCodeChange: (String) -> Unit,
     restaurants: List<Restaurant>,
     viewModel: MainViewModel,
     modifier: Modifier = Modifier,
-//    onSetFavourite: (Int) -> Unit,
-//    onFilterFavourites: (Boolean) -> Unit,
 ) {
     var userPostCode by remember { mutableStateOf("Enter your postcode") }
     var showFavouritesOnly by remember { mutableStateOf(false) }
@@ -52,16 +49,6 @@ fun AppScreen(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Spacer(modifier = modifier.padding(4.dp))
-//            IconButton(onClick = {
-//                showFavouritesOnly = !showFavouritesOnly
-//                if (showFavouritesOnly) {
-//                    onFilterFavourites(showFavouritesOnly)
-//                } else {
-//                    onPostCodeChange(userPostCode)
-//                }
-//            }) {
-//                HeartShape(showFavouritesOnly)
-//            }
                     ShowFavouriteRestaurantsButton(
                         toggleFavourites = { showFavouritesOnly = !showFavouritesOnly },
                         showFavourites = showFavouritesOnly,

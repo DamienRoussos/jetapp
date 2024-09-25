@@ -6,7 +6,6 @@ import com.example.jetapp.domain.repository.RestaurantRepository
 class FilterFavouriteRestaurantsUseCase(
     private val repository: RestaurantRepository,
 ) {
-    operator fun invoke(isFavourite: Boolean): List<Restaurant> {
-        return repository.filterRestaurantsByFavourite(isFavourite).sortedBy { it.name }
-    }
+    operator fun invoke(isFavourite: Boolean): List<Restaurant> =
+        repository.filterRestaurantsByFavourite(isFavourite).sortedBy { it.name }
 }

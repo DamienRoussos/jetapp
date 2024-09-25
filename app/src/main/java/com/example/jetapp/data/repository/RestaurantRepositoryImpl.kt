@@ -8,13 +8,12 @@ import com.example.jetapp.domain.repository.RestaurantRepository
 class RestaurantRepositoryImpl : RestaurantRepository {
     private var data = MockData().loadMockData()
 
-    override fun getRestaurantsByPostCode(postCode: String): List<Restaurant> {
-        return data.filter { it.postCode.contains(postCode.uppercase()) }
-    }
+    override fun getRestaurantsByPostCode(postCode: String): List<Restaurant> =
+        data.filter { it.postCode.contains(postCode.uppercase()) }
 
     override fun toggleRestaurantIsFavourite(restaurantId: Int) {
-        data = data.map {restaurant ->
-            if(restaurant.id == restaurantId) {
+        data = data.map { restaurant ->
+            if (restaurant.id == restaurantId) {
                 restaurant.copy(isFavourite = !restaurant.isFavourite)
             } else {
                 restaurant
@@ -22,8 +21,6 @@ class RestaurantRepositoryImpl : RestaurantRepository {
         }
     }
 
-    override fun filterRestaurantsByFavourite(isFavourite: Boolean): List<Restaurant> {
-        Log.d("get",data.toString())
-        return data.filter { it.isFavourite == isFavourite }
-    }
+    override fun filterRestaurantsByFavourite(isFavourite: Boolean): List<Restaurant> =
+        data.filter { it.isFavourite == isFavourite }
 }

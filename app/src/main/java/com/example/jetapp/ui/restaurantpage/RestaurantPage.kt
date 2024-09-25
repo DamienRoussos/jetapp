@@ -6,13 +6,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.ui.parameterprovider.RestaurantModelParameterProvider
-import com.example.jetapp.ui.restaurantdetails.RestaurantDetails
 import com.example.jetapp.ui.theme.JetAppTheme
 
 @Composable
 fun RestaurantPage(
     restaurant: Restaurant,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
 
 }

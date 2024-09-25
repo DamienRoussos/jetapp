@@ -13,9 +13,13 @@ import com.example.jetapp.domain.usecase.ToggleFavouriteUseCase
 
 class MainViewModel(
     repository: RestaurantRepository = RestaurantRepositoryImpl(),
-    private val getSortedRestaurants: GetSortedRestaurantsUseCase = GetSortedRestaurantsUseCase(repository),
+    private val getSortedRestaurants: GetSortedRestaurantsUseCase = GetSortedRestaurantsUseCase(
+        repository
+    ),
     private val toggleFavouriteUseCase: ToggleFavouriteUseCase = ToggleFavouriteUseCase(repository),
-    private val filterFavouriteRestaurantsUseCase: FilterFavouriteRestaurantsUseCase = FilterFavouriteRestaurantsUseCase(repository),
+    private val filterFavouriteRestaurantsUseCase: FilterFavouriteRestaurantsUseCase = FilterFavouriteRestaurantsUseCase(
+        repository
+    ),
 ) : ViewModel() {
 
     private val _restaurantsState = mutableStateOf<List<Restaurant>>(emptyList())
@@ -46,7 +50,6 @@ class MainViewModel(
                 restaurant
             }
         }
-        Log.d("viewmodel", _restaurantsState.value.toString())
     }
 
     fun filterFavouriteRestaurants(isFavourite: Boolean) {

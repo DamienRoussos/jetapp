@@ -5,7 +5,5 @@ import com.example.jetapp.domain.repository.RestaurantRepository
 class ToggleFavouriteUseCase(
     private val repository: RestaurantRepository,
 ) {
-    operator fun invoke(restaurantId: Int) {
-        return repository.toggleRestaurantIsFavourite(restaurantId)
-    }
+    operator fun invoke(restaurantId: Int) = repository.toggleRestaurantIsFavourite(restaurantId)
 }

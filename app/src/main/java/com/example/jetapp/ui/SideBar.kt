@@ -8,7 +8,7 @@ import com.example.jetapp.ui.theme.JetAppTheme
 @Composable
 fun SideBar() {
     Column {
-        
+
     }
 }
 

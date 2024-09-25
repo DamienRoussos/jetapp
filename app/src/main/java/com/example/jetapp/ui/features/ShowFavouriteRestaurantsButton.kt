@@ -10,11 +10,11 @@ fun ShowFavouriteRestaurantsButton(
     showFavourites: Boolean,
     userPostCode: String,
     onFilterFavourites: (Boolean) -> Unit,
-    onExitFilterFavourites: (String) -> Unit
+    onExitFilterFavourites: (String) -> Unit,
 ) {
     IconButton(onClick = {
         toggleFavourites()
-        if(showFavourites) {
+        if (showFavourites) {
             onExitFilterFavourites(userPostCode)
         } else {
             onFilterFavourites(showFavourites)
