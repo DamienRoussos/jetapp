@@ -5,5 +5,5 @@ import com.example.jetapp.domain.model.Restaurant
 interface RestaurantRepository {
     fun getRestaurantsByPostCode(postCode: String): List<Restaurant>
     fun toggleRestaurantIsFavourite(restaurantId: Int)
-    fun getFavouriteRestaurants(): List<Restaurant>
+    fun filterFavouriteRestaurants(): List<Restaurant>
 }

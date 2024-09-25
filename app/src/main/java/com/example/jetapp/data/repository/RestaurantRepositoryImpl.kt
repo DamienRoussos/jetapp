@@ -1,6 +1,7 @@
 package com.example.jetapp.data.repository
 
 import com.example.jetapp.data.datasource.MockData
+import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.domain.repository.RestaurantRepository
 
 class RestaurantRepositoryImpl : RestaurantRepository {
@@ -32,5 +33,5 @@ class RestaurantRepositoryImpl : RestaurantRepository {
 //        Log.d("toggle",data.toString())
 
         }
-    override fun getFavouriteRestaurants() = data.filter { it.isFavourite }
+    override fun filterFavouriteRestaurants() = data.filter { it.isFavourite }
     }
