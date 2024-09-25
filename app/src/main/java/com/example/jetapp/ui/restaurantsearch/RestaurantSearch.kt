@@ -30,11 +30,7 @@ fun RestaurantSearch(
             postCodeInput = updatedInput
             onPostCodeEnter(updatedInput)
         },
-        placeholder = {
-            if (postCodeInput.isEmpty()) {
-                Text(text = userPostCode)
-            }
-        },
+        placeholder = { Text(text = userPostCode) },
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Done,
             keyboardType = KeyboardType.Text
