@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                             onPostCodeChange = viewModel::searchRestaurantByPostCode,
                             restaurants = restaurantsState,
                             onSetFavourite = viewModel::toggleRestaurantIsFavourite,
-                            onGetFavourites = viewModel::getFavouriteRestaurants
+                            onFilterFavourites = viewModel::filterFavouriteRestaurants
                         )
                     }
                 }

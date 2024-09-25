@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.jetapp.data.repository.RestaurantRepositoryImpl
 import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.domain.repository.RestaurantRepository
-import com.example.jetapp.domain.usecase.GetFavouriteRestaurantsUseCase
+import com.example.jetapp.domain.usecase.FilterFavouriteRestaurantsUseCase
 import com.example.jetapp.domain.usecase.GetSortedRestaurantsUseCase
 import com.example.jetapp.domain.usecase.ToggleFavouriteUseCase
 
@@ -15,7 +15,7 @@ class MainViewModel(
     repository: RestaurantRepository = RestaurantRepositoryImpl(),
     private val getSortedRestaurants: GetSortedRestaurantsUseCase = GetSortedRestaurantsUseCase(repository),
     private val toggleFavouriteUseCase: ToggleFavouriteUseCase = ToggleFavouriteUseCase(repository),
-    private val getFavouriteRestaurants: GetFavouriteRestaurantsUseCase = GetFavouriteRestaurantsUseCase(repository),
+    private val filterFavouriteRestaurantsUseCase: FilterFavouriteRestaurantsUseCase = FilterFavouriteRestaurantsUseCase(repository),
 ) : ViewModel() {
 
     private val _restaurantsState = mutableStateOf<List<Restaurant>>(emptyList())
@@ -49,7 +49,7 @@ class MainViewModel(
         Log.d("viewmodel", _restaurantsState.value.toString())
     }
 
-    fun getFavouriteRestaurants(isFavourite: Boolean) {
+    fun filterFavouriteRestaurants(isFavourite: Boolean) {
         _restaurantsState.value = _restaurantsState.value.filter { it.isFavourite == isFavourite }
     }
 }

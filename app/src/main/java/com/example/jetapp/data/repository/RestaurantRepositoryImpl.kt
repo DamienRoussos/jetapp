@@ -22,7 +22,7 @@ class RestaurantRepositoryImpl : RestaurantRepository {
         }
     }
 
-    override fun getFavouriteRestaurants(isFavourite: Boolean): List<Restaurant> {
+    override fun filterRestaurantsByFavourite(isFavourite: Boolean): List<Restaurant> {
         Log.d("get",data.toString())
         return data.filter { it.isFavourite == isFavourite }
     }
