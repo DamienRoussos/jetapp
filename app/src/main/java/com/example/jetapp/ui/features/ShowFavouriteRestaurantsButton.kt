@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import com.example.jetapp.ui.heartshapefavourite.HeartShape
 
 @Composable
-fun FavouriteRestaurants(
+fun ShowFavouriteRestaurantsButton(
     toggleFavourites: () -> Unit,
     showFavourites: Boolean,
     userPostCode: String,
