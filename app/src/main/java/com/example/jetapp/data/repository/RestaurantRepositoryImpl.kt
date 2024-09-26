@@ -1,6 +1,7 @@
 package com.example.jetapp.data.repository
 
 import com.example.jetapp.data.datasource.MockData
+import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.domain.repository.RestaurantRepository
 
 class RestaurantRepositoryImpl : RestaurantRepository {
@@ -9,7 +10,6 @@ class RestaurantRepositoryImpl : RestaurantRepository {
     override fun getRestaurantsByPostCode(postCode: String) =
         data.filter { it.postCode.contains(postCode.uppercase()) }
 
-    //    adjust for favourite and unfavourite
     override fun toggleRestaurantIsFavourite(restaurantId: Int) {
         val index = data.indexOfFirst { it.id == restaurantId }
         if (index == -1) return
@@ -22,6 +22,7 @@ class RestaurantRepositoryImpl : RestaurantRepository {
                 val restaurant = data[index]
                 data[index] = restaurant.copy(isFavourite = !restaurant.isFavourite)
             }
+
 //        data = data.map {restaurant ->
 //            if(restaurant.id == restaurantId) {
 //                restaurant.copy(isFavourite = !restaurant.isFavourite)
@@ -30,7 +31,7 @@ class RestaurantRepositoryImpl : RestaurantRepository {
 //            }
 //        }
 //        Log.d("toggle",data.toString())
-    }
 
-    override fun getFavouriteRestaurants() = data.filter { it.isFavourite }
-}
+        }
+    override fun filterFavouriteRestaurants() = data.filter { it.isFavourite }
+    }
