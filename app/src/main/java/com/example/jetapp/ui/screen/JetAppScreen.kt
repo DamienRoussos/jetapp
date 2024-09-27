@@ -61,6 +61,7 @@ fun AppScreen(
                         userPostCode = userPostCode,
                         onPostCodeEnter = { updatedPostcode ->
                             userPostCode = updatedPostcode
+//                            getRestaurantsByPostCode(updatedPostcode)
                             onPostCodeChange(updatedPostcode)
                             showFavouritesOnly = false
                         },
