@@ -57,8 +57,6 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:2.7.0")
 
-//    implementation("com.github.a914-gowtham:compose-ratingbar:1.3.12")
-
     implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
