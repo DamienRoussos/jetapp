@@ -18,25 +18,32 @@ import retrofit2.HttpException
 
 class MainViewModel(
     repository: RestaurantRepository = RestaurantRepositoryImpl(),
-    private val getSortedRestaurants: GetSortedRestaurantsUseCase = GetSortedRestaurantsUseCase(
-        repository
-    ),
+    private val getSortedRestaurants: GetSortedRestaurantsUseCase =
+        GetSortedRestaurantsUseCase(
+            repository
+        ),
     private val toggleFavouriteUseCase: ToggleFavouriteUseCase = ToggleFavouriteUseCase(repository),
-    private val filterFavouriteRestaurants: FilterFavouriteRestaurantsUseCase = FilterFavouriteRestaurantsUseCase(
-        repository
-    ),
-    private val searchRestaurantsByPostCode: GetRemoteRestaurantsByPostCodeUseCase = GetRemoteRestaurantsByPostCodeUseCase(
-        repository
-    ),
+    private val filterFavouriteRestaurants: FilterFavouriteRestaurantsUseCase =
+        FilterFavouriteRestaurantsUseCase(
+            repository
+        ),
+    private val searchRestaurantsByPostCode: GetRemoteRestaurantsByPostCodeUseCase =
+        GetRemoteRestaurantsByPostCodeUseCase(
+            repository
+        ),
 ) : ViewModel() {
 
     private val _restaurantsState = mutableStateOf<List<Restaurant>>(emptyList())
     val restaurantsState: State<List<Restaurant>> = _restaurantsState
     private var lastSearchedPostCode = ""
 
-    init {
-        getRestaurantsByPostCode("ec4m")
-    }
+    private val _remoteRestaurantsState = mutableStateOf<List<Restaurant>>(emptyList())
+    val remoteRestaurantState: State<List<Restaurant>> = _remoteRestaurantsState
+
+
+//    init {
+//        getRemoteRestaurantsByPostCode("ec4m")
+//    }
 //    private val _restaurantsFlow = MutableStateFlow<List<Restaurant>>(emptyList())
 //    val restaurantsFlow: StateFlow<List<Restaurant>> = _restaurantsFlow
 //
@@ -72,12 +79,15 @@ class MainViewModel(
         }
     }
 
-    fun getRestaurantsByPostCode(postCode: String) {
+
+    fun getRemoteRestaurantsByPostCode(postCode: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                Log.d("apitest", searchRestaurantsByPostCode(postCode).toString())
+                val restaurants = searchRestaurantsByPostCode(postCode)
+                _remoteRestaurantsState.value = restaurants
+                Log.d("apitesttry", restaurants.toString())
             } catch (e: HttpException) {
-                Log.e("apitest", e.message ?: "ERROR")
+                Log.e("apitesterror", e.message ?: "ERROR")
             }
         }
     }

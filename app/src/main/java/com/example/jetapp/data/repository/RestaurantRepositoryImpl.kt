@@ -32,6 +32,7 @@ class RestaurantRepositoryImpl(
 //            if(restaurant.id == restaurantId) {
 //                restaurant.copy(isFavourite = !restaurant.isFavourite)
 //            } else {
+
 //                restaurant
 //            }
 //        }
@@ -41,6 +42,8 @@ class RestaurantRepositoryImpl(
 
     override fun filterFavouriteRestaurants() = data.filter { it.isFavourite }
 
-    override suspend fun searchRemoteRestaurantsByPostCode(postCode: String): List<Restaurant> =
-        dataSourceImpl.getRestaurantsByPostCode(postCode)
+    override suspend fun searchRemoteRestaurantsByPostCode(postCode: String): List<Restaurant> {
+        val restaurants = dataSourceImpl.getRestaurantsByPostCode(postCode)
+        return restaurants.filter { it.postCode.contains(postCode.uppercase()) }
+    }
 }

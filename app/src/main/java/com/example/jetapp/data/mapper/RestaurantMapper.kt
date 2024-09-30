@@ -5,8 +5,8 @@ import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.util.Mapper
 
 class RestaurantMapper(
-    private val cuisineMapper: CuisineMapper = CuisineMapper()
-): Mapper<RestaurantResponse, Restaurant> {
+    private val cuisineMapper: CuisineMapper = CuisineMapper(),
+) : Mapper<RestaurantResponse, Restaurant> {
     override fun map(input: RestaurantResponse) = Restaurant(
         id = input.id.toInt(),
         name = input.name,

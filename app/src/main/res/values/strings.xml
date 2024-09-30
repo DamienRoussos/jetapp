@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Jet App</string>
+    <string name="app_name">Jet App %1$s</string>
 
 
     <string name="resto1_name">Premier - St Martin\'s Hill Post Office</string>
