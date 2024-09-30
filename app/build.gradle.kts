@@ -51,11 +51,8 @@ android {
 
 dependencies {
 
-    implementation("com.squareup.picasso:picasso:2.71828")
-
-    implementation("io.coil-kt:coil-gif:2.7.0")
-
-    implementation("io.coil-kt:coil-compose:2.7.0")
+    implementation(libs.coil.gif)
+    implementation(libs.coil.compose)
 
     implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.core.ktx)
