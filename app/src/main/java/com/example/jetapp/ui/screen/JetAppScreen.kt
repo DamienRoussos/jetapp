@@ -45,7 +45,7 @@ fun AppScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            Header(dataSource = "remote")
+            Header(dataSource = if(useRemoteData) "remote" else "mock")
         }
     ) { contentPadding ->
         LaunchedEffect(useRemoteData) {
