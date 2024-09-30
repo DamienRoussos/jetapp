@@ -51,13 +51,8 @@ android {
 
 dependencies {
 
-    implementation("com.squareup.picasso:picasso:2.71828")
-
-    implementation("io.coil-kt:coil-gif:2.7.0")
-
-    implementation("io.coil-kt:coil-compose:2.7.0")
-
-//    implementation("com.github.a914-gowtham:compose-ratingbar:1.3.12")
+    implementation(libs.coil.gif)
+    implementation(libs.coil.compose)
 
     implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.core.ktx)
@@ -69,6 +64,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
