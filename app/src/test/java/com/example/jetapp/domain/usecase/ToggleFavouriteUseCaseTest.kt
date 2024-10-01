@@ -5,8 +5,6 @@ import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Test
 
-import org.junit.Assert.*
-
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -16,7 +14,7 @@ class ToggleFavouriteUseCaseTest {
 
     private val repository: RestaurantRepository = mockk(relaxUnitFun = true)
     private val useCase = ToggleFavouriteUseCase(repository)
-    
+
     @Test
     fun `SHOULD call function from repository WHEN useCase is called`() {
         // Given

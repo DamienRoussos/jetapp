@@ -6,44 +6,36 @@ import com.example.jetapp.domain.repository.RestaurantRepository
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.Assert.assertEquals
 import org.junit.Test
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class GetSortedRestaurantsUseCaseTest {
+class FilterFavouriteRestaurantsUseCaseTest {
 
     private val repository: RestaurantRepository = mockk(relaxed = true)
-    private val useCase = GetSortedRestaurantsUseCase(repository)
+    private val useCase = FilterFavouriteRestaurantsUseCase(repository)
 
     @Test
     fun `SHOULD call function from repository WHEN useCase is called`() {
         // Given
-        val postCode = "postCode"
 
         // When
-        useCase(postCode)
+        useCase()
 
         // Then
-        verify { repository.getRestaurantsByPostCode(postCode) }
+        verify { repository.filterFavouriteRestaurants() }
     }
 
     @Test
-    fun `SHOULD return sorted restaurants from repository WHEN useCase is called`() {
+    fun `SHOULD return favourite restaurants from repository WHEN useCase is called`() {
         // Given
         val restaurants = mockedRestaurants
-        val expectedResult = sortedRestaurants
-        val postCode = "postCode"
-        every { repository.getRestaurantsByPostCode(postCode) } returns restaurants
+        val expectedResult = favouriteRestaurants.sortedBy { it.name }
+        every { repository.filterFavouriteRestaurants() } returns restaurants
 
         // When
-        val result = useCase(postCode)
+        useCase()
 
         // Then
-        assertEquals(expectedResult, result)
+        verify { repository.filterFavouriteRestaurants() }
     }
 
     companion object {
@@ -59,7 +51,7 @@ class GetSortedRestaurantsUseCaseTest {
                 ),
                 5.0,
                 "https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/114934.gif",
-                isFavourite = false
+                isFavourite = true
             ),
             Restaurant(
                 2,
@@ -86,10 +78,10 @@ class GetSortedRestaurantsUseCaseTest {
                 ),
                 4.1,
                 "https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/130434.gif",
-                isFavourite = false
+                isFavourite = true
             )
         )
-        private val sortedRestaurants = listOf(
+        private val favouriteRestaurants = listOf(
             Restaurant(
                 3,
                 "Gourmet Burger Kitchen - St Pauls",
@@ -101,7 +93,7 @@ class GetSortedRestaurantsUseCaseTest {
                 ),
                 4.1,
                 "https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/130434.gif",
-                isFavourite = false
+                isFavourite = true
             ),
             Restaurant(
                 1,
@@ -114,22 +106,9 @@ class GetSortedRestaurantsUseCaseTest {
                 ),
                 5.0,
                 "https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/114934.gif",
-                isFavourite = false
-            ),
-            Restaurant(
-                2,
-                "Starbucks - Paternoster Square",
-                "EC4M",
-                "EC4M 7DX",
-                listOf(
-                    CuisineType("Breakfast"),
-                    CuisineType("Coffee"),
-                    CuisineType("Lunch")
-                ),
-                5.0,
-                "https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/147838.gif",
-                isFavourite = false
+                isFavourite = true
             )
         )
     }
 }
+
