@@ -7,5 +7,5 @@ class FilterFavouriteRestaurantsUseCase(
     private val repository: RestaurantRepository,
 ) {
     operator fun invoke(): List<Restaurant> =
-    repository.filterFavouriteRestaurants().sortedBy { it.name }
+        repository.filterFavouriteRestaurants().sortedBy { it.name }
 }

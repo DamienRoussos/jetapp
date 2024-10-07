@@ -6,6 +6,7 @@ import com.example.jetapp.domain.repository.RestaurantRepository
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class FilterFavouriteRestaurantsUseCaseTest {
@@ -15,8 +16,6 @@ class FilterFavouriteRestaurantsUseCaseTest {
 
     @Test
     fun `SHOULD call function from repository WHEN useCase is called`() {
-        // Given
-
         // When
         useCase()
 
@@ -25,17 +24,17 @@ class FilterFavouriteRestaurantsUseCaseTest {
     }
 
     @Test
-    fun `SHOULD return favourite restaurants from repository WHEN useCase is called`() {
+    fun `SHOULD return sorted restaurants from repository WHEN useCase is called`() {
         // Given
         val restaurants = mockedRestaurants
-        val expectedResult = favouriteRestaurants.sortedBy { it.name }
+        val expectedResult = favouriteRestaurants
         every { repository.filterFavouriteRestaurants() } returns restaurants
 
         // When
-        useCase()
+        val result = useCase()
 
         // Then
-        verify { repository.filterFavouriteRestaurants() }
+        assertEquals(expectedResult, result)
     }
 
     companion object {
@@ -107,6 +106,20 @@ class FilterFavouriteRestaurantsUseCaseTest {
                 5.0,
                 "https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/114934.gif",
                 isFavourite = true
+            ),
+            Restaurant(
+                2,
+                "Starbucks - Paternoster Square",
+                "EC4M",
+                "EC4M 7DX",
+                listOf(
+                    CuisineType("Breakfast"),
+                    CuisineType("Coffee"),
+                    CuisineType("Lunch")
+                ),
+                5.0,
+                "https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/147838.gif",
+                isFavourite = false
             )
         )
     }

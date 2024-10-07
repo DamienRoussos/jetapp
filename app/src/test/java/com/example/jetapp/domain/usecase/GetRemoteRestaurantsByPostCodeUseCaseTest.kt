@@ -1,10 +1,12 @@
 package com.example.jetapp.domain.usecase
 
+import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.domain.repository.RestaurantRepository
-import io.mockk.coVerify
+import io.mockk.coEvery
 import io.mockk.mockk
-import org.junit.Test
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
+import org.junit.Test
 
 class GetRemoteRestaurantsByPostCodeUseCaseTest {
 
@@ -12,17 +14,16 @@ class GetRemoteRestaurantsByPostCodeUseCaseTest {
     private val useCase = GetRemoteRestaurantsByPostCodeUseCase(repository)
 
     @Test
-    fun `SHOULD call function from repository WHEN useCase is called`() {
-        runTest {
-            // Given
-            val postCode = "postCode"
+    fun `SHOULD call function from repository WHEN useCase is called`() = runTest {
+        // Given
+        val postCode = "postCode"
+        val restaurants: List<Restaurant> = mockk()
+        coEvery { repository.searchRemoteRestaurantsByPostCode(postCode) } returns restaurants
 
-            // When
-            useCase(postCode)
+        // When
+        val result = useCase(postCode)
 
-            // Then
-            coVerify { repository.getRestaurantsByPostCode(postCode) }
-        }
+        // Then
+        assertEquals(restaurants, result)
     }
-
 }
