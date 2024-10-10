@@ -23,9 +23,12 @@ class MainActivity : ComponentActivity() {
                 val restaurantsState by viewModel.restaurantsState
 //                val restaurantsFlow by viewModel.restaurantsFlow.collectAsState()
 //                val restaurantsLiveData by viewModel.restaurantsLiveData.observeAsState()
+                val remoteRestaurantsState by viewModel.remoteRestaurantState
+
 
                 AppScreen(
                     restaurants = restaurantsState,
+                    remoteRestaurants = remoteRestaurantsState,
                     viewModel = viewModel,
                 )
             }

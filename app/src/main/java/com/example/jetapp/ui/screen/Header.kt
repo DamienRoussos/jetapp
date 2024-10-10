@@ -11,11 +11,13 @@ import com.example.jetapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Header() {
+fun Header(
+    dataSource: String,
+) {
     CenterAlignedTopAppBar(
         title = {
             Text(
-                text = stringResource(R.string.app_name),
+                text = stringResource(R.string.app_name, dataSource),
             )
         },
         modifier = Modifier

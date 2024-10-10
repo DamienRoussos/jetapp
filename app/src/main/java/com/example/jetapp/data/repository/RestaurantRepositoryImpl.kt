@@ -1,10 +1,15 @@
 package com.example.jetapp.data.repository
 
 import com.example.jetapp.data.datasource.MockData
+import com.example.jetapp.data.datasource.RestaurantRemoteDataSource
+import com.example.jetapp.data.datasource.RestaurantRemoteDataSourceImpl
 import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.domain.repository.RestaurantRepository
 
-class RestaurantRepositoryImpl : RestaurantRepository {
+class RestaurantRepositoryImpl(
+    private val dataSourceImpl: RestaurantRemoteDataSource = RestaurantRemoteDataSourceImpl(),
+) : RestaurantRepository {
+
     private val data = MockData().loadMockData().toMutableList()
 
     override fun getRestaurantsByPostCode(postCode: String) =
@@ -27,11 +32,18 @@ class RestaurantRepositoryImpl : RestaurantRepository {
 //            if(restaurant.id == restaurantId) {
 //                restaurant.copy(isFavourite = !restaurant.isFavourite)
 //            } else {
+
 //                restaurant
 //            }
 //        }
 //        Log.d("toggle",data.toString())
 
-        }
-    override fun filterFavouriteRestaurants() = data.filter { it.isFavourite }
     }
+
+    override fun filterFavouriteRestaurants() = data.filter { it.isFavourite }
+
+    override suspend fun searchRemoteRestaurantsByPostCode(postCode: String): List<Restaurant> {
+        val restaurants = dataSourceImpl.getRestaurantsByPostCode(postCode)
+        return restaurants.filter { it.postCode.contains(postCode.uppercase()) }
+    }
+}
