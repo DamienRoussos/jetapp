@@ -1,6 +1,5 @@
 package com.example.jetapp.ui.main
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -12,7 +11,6 @@ import com.example.jetapp.domain.usecase.FilterFavouriteRestaurantsUseCase
 import com.example.jetapp.domain.usecase.GetRemoteRestaurantsByPostCodeUseCase
 import com.example.jetapp.domain.usecase.GetSortedRestaurantsUseCase
 import com.example.jetapp.domain.usecase.ToggleFavouriteUseCase
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -80,14 +78,16 @@ class MainViewModel(
     }
 
 
+//    removed the explicit dispatcher io with Carlos and let it figured automatically
     fun getRemoteRestaurantsByPostCode(postCode: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             try {
                 val restaurants = searchRestaurantsByPostCode(postCode)
                 _remoteRestaurantsState.value = restaurants
-                Log.d("apitesttry", restaurants.toString())
+                println(_remoteRestaurantsState.value)
+//                Log.d("apitesttry", restaurants.toString())
             } catch (e: HttpException) {
-                Log.e("apitesterror", e.message ?: "ERROR")
+//                Log.e("apitesterror", e.message ?: "ERROR")
             }
         }
     }
