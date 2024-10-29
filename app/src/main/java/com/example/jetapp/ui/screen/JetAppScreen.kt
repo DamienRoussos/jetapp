@@ -15,16 +15,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.jetapp.data.datasource.MockData
 import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.ui.features.ShowFavouriteRestaurantsButton
 import com.example.jetapp.ui.features.ToggleMockOrRemoteData
 import com.example.jetapp.ui.main.MainViewModel
 import com.example.jetapp.ui.restaurantdetails.RestaurantCardList
 import com.example.jetapp.ui.restaurantsearch.RestaurantSearch
-import com.example.jetapp.ui.theme.JetAppTheme
 
 @Composable
 fun AppScreen(
@@ -93,14 +90,14 @@ fun AppScreen(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun AppScreenPreview() {
-    JetAppTheme {
-        AppScreen(
-            viewModel = MainViewModel(),
-            restaurants = MockData().loadMockData(),
-            remoteRestaurants = emptyList()
-        )
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun AppScreenPreview() {
+//    JetAppTheme {
+//        AppScreen(
+//            viewModel = MainViewModel(),
+//            restaurants = MockData().loadMockData(),
+//            remoteRestaurants = emptyList()
+//        )
+//    }
+//}

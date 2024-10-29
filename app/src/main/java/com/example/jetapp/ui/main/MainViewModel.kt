@@ -4,31 +4,22 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jetapp.data.repository.RestaurantRepositoryImpl
 import com.example.jetapp.domain.model.Restaurant
-import com.example.jetapp.domain.repository.RestaurantRepository
 import com.example.jetapp.domain.usecase.FilterFavouriteRestaurantsUseCase
 import com.example.jetapp.domain.usecase.GetRemoteRestaurantsByPostCodeUseCase
 import com.example.jetapp.domain.usecase.GetSortedRestaurantsUseCase
 import com.example.jetapp.domain.usecase.ToggleFavouriteUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import javax.inject.Inject
 
-class MainViewModel(
-    repository: RestaurantRepository = RestaurantRepositoryImpl(),
-    private val getSortedRestaurants: GetSortedRestaurantsUseCase =
-        GetSortedRestaurantsUseCase(
-            repository
-        ),
-    private val toggleFavouriteUseCase: ToggleFavouriteUseCase = ToggleFavouriteUseCase(repository),
-    private val filterFavouriteRestaurants: FilterFavouriteRestaurantsUseCase =
-        FilterFavouriteRestaurantsUseCase(
-            repository
-        ),
-    private val searchRestaurantsByPostCode: GetRemoteRestaurantsByPostCodeUseCase =
-        GetRemoteRestaurantsByPostCodeUseCase(
-            repository
-        ),
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val getSortedRestaurants: GetSortedRestaurantsUseCase,
+    private val toggleFavouriteUseCase: ToggleFavouriteUseCase,
+    private val filterFavouriteRestaurants: FilterFavouriteRestaurantsUseCase,
+    private val searchRestaurantsByPostCode: GetRemoteRestaurantsByPostCodeUseCase
 ) : ViewModel() {
 
     private val _restaurantsState = mutableStateOf<List<Restaurant>>(emptyList())

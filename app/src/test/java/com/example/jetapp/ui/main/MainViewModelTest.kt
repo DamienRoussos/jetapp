@@ -2,7 +2,6 @@ package com.example.jetapp.ui.main
 
 import com.example.jetapp.domain.model.CuisineType
 import com.example.jetapp.domain.model.Restaurant
-import com.example.jetapp.domain.repository.RestaurantRepository
 import com.example.jetapp.domain.usecase.FilterFavouriteRestaurantsUseCase
 import com.example.jetapp.domain.usecase.GetRemoteRestaurantsByPostCodeUseCase
 import com.example.jetapp.domain.usecase.GetSortedRestaurantsUseCase
@@ -24,13 +23,11 @@ class MainViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private val repository: RestaurantRepository = mockk()
     private val getSortedRestaurants: GetSortedRestaurantsUseCase = mockk()
     private val toggleFavouriteUseCase: ToggleFavouriteUseCase = mockk()
     private val filterFavouriteRestaurants: FilterFavouriteRestaurantsUseCase = mockk()
     private val searchRestaurantsByPostCode: GetRemoteRestaurantsByPostCodeUseCase = mockk()
     private val viewModel = MainViewModel(
-        repository = repository,
         getSortedRestaurants = getSortedRestaurants,
         toggleFavouriteUseCase = toggleFavouriteUseCase,
         filterFavouriteRestaurants = filterFavouriteRestaurants,

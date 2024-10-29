@@ -2,12 +2,12 @@ package com.example.jetapp.data.repository
 
 import com.example.jetapp.data.datasource.MockData
 import com.example.jetapp.data.datasource.RestaurantRemoteDataSource
-import com.example.jetapp.data.datasource.RestaurantRemoteDataSourceImpl
 import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.domain.repository.RestaurantRepository
+import javax.inject.Inject
 
-class RestaurantRepositoryImpl(
-    private val dataSourceImpl: RestaurantRemoteDataSource = RestaurantRemoteDataSourceImpl(),
+class RestaurantRepositoryImpl @Inject constructor(
+    private val dataSource: RestaurantRemoteDataSource
 ) : RestaurantRepository {
 
     private val data = MockData().loadMockData().toMutableList()
@@ -43,7 +43,7 @@ class RestaurantRepositoryImpl(
     override fun filterFavouriteRestaurants() = data.filter { it.isFavourite }
 
     override suspend fun searchRemoteRestaurantsByPostCode(postCode: String): List<Restaurant> {
-        val restaurants = dataSourceImpl.getRestaurantsByPostCode(postCode)
+        val restaurants = dataSource.getRestaurantsByPostCode(postCode)
         return restaurants.filter { it.postCode.contains(postCode.uppercase()) }
     }
 }

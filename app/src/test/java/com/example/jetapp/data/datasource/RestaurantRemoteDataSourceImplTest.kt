@@ -4,57 +4,43 @@ import com.example.jetapp.data.api.JetApi
 import com.example.jetapp.data.mapper.RestaurantMapper
 import com.example.jetapp.data.model.RestaurantResponse
 import com.example.jetapp.data.model.RestaurantResponseContainer
+import com.example.jetapp.domain.model.Restaurant
 import io.mockk.coEvery
-import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
 
 class RestaurantRemoteDataSourceImplTest {
-    private val restaurantMapper: RestaurantMapper = mockk()
+
+    private val restaurantMapper : RestaurantMapper = mockk()
     private val jetApi: JetApi = mockk()
-    private val dataSource = RestaurantRemoteDataSourceImpl(restaurantMapper)
+    private val dataSource: RestaurantRemoteDataSource = RestaurantRemoteDataSourceImpl(restaurantMapper, jetApi)
 
     @Test
-    fun `SHOULD call the API WHEN a postcode is provided`() = runTest {
+    fun `SHOULD call the API WHEN a postcode is provided and mapped the response`() = runTest {
         // Given
-        val postcode = "EC4M 7DY"
-        val restaurantResponse = listOf(
-            mockk<RestaurantResponse>(),
-            mockk<RestaurantResponse>(),
-            mockk<RestaurantResponse>()
-        )
-        val mappedRestaurants = listOf(
-            mockk<RestaurantResponse>(),
-            mockk<RestaurantResponse>(),
-            mockk<RestaurantResponse>()
-        ).map{restaurantMapper.map(it)}
+        val postCode = "SW1A 1AA"
+        val restaurantResponse1: RestaurantResponse = mockk()
+        val restaurantResponse2: RestaurantResponse = mockk()
+        val restaurantResponseList: List<RestaurantResponse> = listOf(restaurantResponse1,  restaurantResponse2)
+        val restaurantResponseContainer: RestaurantResponseContainer = mockk {
+            every { restaurants } returns restaurantResponseList
+        }
 
-        // OR
-//        val mappedRestaurants = listOf(
-//            mockk<Restaurant>(),
-//            mockk<Restaurant>(),
-//            mockk<Restaurant>()
-//        )
+        coEvery { jetApi.getRestaurantsByPostCode(postCode) } returns restaurantResponseContainer
+        val expectedRestaurant1: Restaurant = mockk()
+        val expectedRestaurant2: Restaurant = mockk()
+        every { restaurantMapper.map(restaurantResponse1)} returns expectedRestaurant1
+        every { restaurantMapper.map(restaurantResponse2)} returns expectedRestaurant2
 
-        coEvery { jetApi.getRestaurantsByPostCode(postcode) } returns RestaurantResponseContainer(
-            restaurantResponse
-        )
-        every { restaurantMapper.map(any<RestaurantResponse>()) } returnsMany mappedRestaurants
-
-        val dataSource = RestaurantRemoteDataSourceImpl(restaurantMapper)
         // When
-        dataSource.getRestaurantsByPostCode(postcode)
+
+        val result = dataSource.getRestaurantsByPostCode(postCode)
 
         // Then
-        coVerify { jetApi.getRestaurantsByPostCode(postcode) }
-
-    }
-
-    @Test
-    fun `SHOULD map the response from the API using the Mapper and sort the results`() {
-
+        assertEquals(listOf(expectedRestaurant1, expectedRestaurant2), result)
     }
 }

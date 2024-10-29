@@ -20,14 +20,14 @@ fun RestaurantImage(
     image: String,
     modifier: Modifier = Modifier,
 ) {
-
     AsyncImage(
         model = image,
         contentDescription = "Restaurant Image",
-        modifier = modifier
-            .size(80.dp)
-            .shadow(4.dp, RoundedCornerShape(4.dp))
-            .clip(RoundedCornerShape(4.dp)),
+        modifier =
+            modifier
+                .size(80.dp)
+                .shadow(4.dp, RoundedCornerShape(4.dp))
+                .clip(RoundedCornerShape(4.dp)),
         contentScale = ContentScale.Crop,
     )
 }
@@ -36,7 +36,7 @@ fun RestaurantImage(
 @Composable
 fun RestaurantImagePreview(
     @PreviewParameter(
-        RestaurantModelParameterProvider::class
+        RestaurantModelParameterProvider::class,
     )
     model: Restaurant,
 ) {

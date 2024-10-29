@@ -3,9 +3,10 @@ package com.example.jetapp.data.mapper
 import com.example.jetapp.data.model.RestaurantResponse
 import com.example.jetapp.domain.model.Restaurant
 import com.example.jetapp.util.Mapper
+import javax.inject.Inject
 
-class RestaurantMapper(
-    private val cuisineMapper: CuisineMapper = CuisineMapper(),
+class RestaurantMapper @Inject constructor(
+    private val cuisineMapper: CuisineMapper
 ) : Mapper<RestaurantResponse, Restaurant> {
     override fun map(input: RestaurantResponse) = Restaurant(
         id = input.id.toInt(),
